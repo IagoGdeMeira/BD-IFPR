@@ -1,0 +1,23 @@
+DROP DATABASE IF EXISTS banco_iago;
+CREATE DATABASE IF NOT EXISTS banco_iago;
+USE banco_iago;
+
+CREATE TABLE usuario(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    senha VARCHAR(30) NOT NULL,
+    biografia VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    telefone BIGINT NOT NULL UNIQUE,
+    ativo ENUM('S', 'N') NOT NULL
+);
+
+CREATE TABLE campanha(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE usuario_campanha(
+	usuario_id INT NOT NULL, FOREIGN KEY (usuario_id) REFERENCES usuario (id),
+    apelido VARCHAR(255) NOT NULL
+);

@@ -12,12 +12,20 @@ CREATE TABLE usuario(
     ativo ENUM('S', 'N') NOT NULL
 );
 
+CREATE TABLE mestre(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    ativo ENUM('S', 'N'),
+    usuario_id INT NOT NULL, FOREIGN KEY (usuario_id) REFERENCES usuario (id)
+);
+
 CREATE TABLE campanha(
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(30) NOT NULL
+    nome VARCHAR(30) NOT NULL,
+    ativa ENUM('S', 'N')
 );
 
 CREATE TABLE usuario_campanha(
 	usuario_id INT NOT NULL, FOREIGN KEY (usuario_id) REFERENCES usuario (id),
+    campanha_id INT NOT NULL, FOREIGN KEY (campanha_id) REFERENCES campanha (id),
     apelido VARCHAR(255) NOT NULL
 );

@@ -21,7 +21,8 @@ CREATE TABLE mestre(
 CREATE TABLE campanha(
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(30) NOT NULL,
-    ativa ENUM('S', 'N')
+    ativa ENUM('S', 'N'),
+    mestre_id INT NOT NULL, FOREIGN KEY (mestre_id) REFERENCES mestre (id)
 );
 
 CREATE TABLE usuario_campanha(
@@ -29,3 +30,15 @@ CREATE TABLE usuario_campanha(
     campanha_id INT NOT NULL, FOREIGN KEY (campanha_id) REFERENCES campanha (id),
     apelido VARCHAR(255) NOT NULL
 );
+
+INSERT INTO usuario (nome, senha, biografia, email, telefone) VALUES ('JorginzKilo', 'kneilo7852', 'rpgzin do bão é vida', 'jorginnupik@gmail.com', 5544989652018);
+INSERT INTO usuario (nome, senha, biografia, email, telefone) VALUES ('lolazeira', 'brilhabrilha', 'Gosto de Fofura!', 'larissagemaplayer@hotmail.com', 5541923967189);
+INSERT INTO usuario (nome, senha, biografia, email, telefone) VALUES ('bob', 'meunomeehbob', 'bob', 'bobbobbobobo@gmail.com', 5547963874121);
+
+INSERT INTO mestre (usuario_id) VALUES (1);
+INSERT INTO mestre (usuario_id) VALUES (2);
+INSERT INTO mestre (usuario_id) VALUES (3);
+
+INSERT INTO campanha (nome, mestre_id) VALUES ('RP do Jorgeta!!!', 1);
+INSERT INTO campanha (nome, mestre_id) VALUES ('Meu rpg <3<3', 2);
+INSERT INTO campanha (nome, mestre_id) VALUES ('B O B', 3);

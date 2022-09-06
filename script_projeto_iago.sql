@@ -4,10 +4,10 @@ USE banco_iago;
 
 CREATE TABLE usuario(
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(255) NOT NULL,
+    nome VARCHAR(45) NOT NULL,
     senha VARCHAR(30) NOT NULL,
-    biografia VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
+    biografia VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
     telefone BIGINT NOT NULL UNIQUE,
     ativo ENUM('S', 'N') NOT NULL
 );
@@ -21,14 +21,29 @@ CREATE TABLE mestre(
 CREATE TABLE campanha(
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(30) NOT NULL,
-    ativa ENUM('S', 'N'),
+    ativa ENUM('S', 'N') NOT NULL,
     mestre_id INT NOT NULL, FOREIGN KEY (mestre_id) REFERENCES mestre (id)
 );
 
 CREATE TABLE usuario_campanha(
 	usuario_id INT NOT NULL, FOREIGN KEY (usuario_id) REFERENCES usuario (id),
     campanha_id INT NOT NULL, FOREIGN KEY (campanha_id) REFERENCES campanha (id),
-    apelido VARCHAR(255) NOT NULL
+    apelido VARCHAR(45) NOT NULL
+);
+
+CREATE TABLE chat(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(40) NOT NULL,
+    campanha_id INT NOT NULL, FOREIGN KEY (campanha_id) REFERENCES campanha (id)
+);
+
+CREATE TABLE mensagem(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	conteudo TEXT NOT NULL,
+    data_envio DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    chat_id INT NOT NULL, FOREIGN KEY (chat_id) REFERENCES chat (id),
+	usuario_campanha_usuario_id INT NOT NULL, FOREIGN KEY (usuario_campanha_usuario_id) REFERENCES usuario_campanha (usuario_id),
+	usuario_campanha_campanha_id INT NOT NULL, FOREIGN KEY (usuario_campanha_campanha_id) REFERENCES usuario_campanha (campanha_id)
 );
 
 INSERT INTO usuario (nome, senha, biografia, email, telefone) VALUES ('JorginzKilo', 'kneilo7852', 'rpgzin do bão é vida', 'jorginnupik@gmail.com', 5544989652018);
